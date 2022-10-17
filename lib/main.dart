@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
-import 'package:desktop_lifecycle/desktop_lifecycle.dart';
+
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 
@@ -41,16 +42,13 @@ class _ExampleMainWindowState extends State<_ExampleMainWindow> {
               onPressed: () async {
                 final window =
                 await DesktopMultiWindow.createWindow(jsonEncode({
-                  'args1': 'Sub window',
-                  'args2': 100,
-                  'args3': true,
+                  'args1': 'assets/smartphone.png',
                   'business': 'Sumer chawala',
                 }));
                 window
                   ..setFrame(const Offset(0, 0) & const Size(1280, 720))
                   ..center()
                   ..setTitle('Another window for sumer')
-                  ..resizable(false)
                   ..show();
               },
               child: const Text('Add new Window sumer please'),
@@ -98,21 +96,11 @@ class _ExampleSubWindow extends StatelessWidget {
         ),
         body: Column(
           children: [
-            if (args != null)
-              Text(
-                'Arguments:Happy Sumer :)',
-                style: const TextStyle(fontSize: 20),
-              ),
-            ValueListenableBuilder<bool>(
-              valueListenable: DesktopLifecycle.instance.isActive,
-              builder: (context, active, child) {
-                if (active) {
-                  return const Text('Window Active');
-                } else {
-                  return const Text('Window Inactive');
-                }
-              },
+            args != null?Image(image: AssetImage(args!['args1']),):Container(
+
+              child: Text("------------------223"),
             ),
+
             TextButton(
               onPressed: () async {
                 windowController.close();

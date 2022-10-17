@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_windows
-  desktop_lifecycle
   desktop_multi_window
   flutter_acrylic
   screen_retriever
